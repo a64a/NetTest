@@ -1,0 +1,11 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="NetTest.MainWindow"
+        Title="NetTest" Width="500" Height="350">
+        
+    <StackPanel Margin="10">
+        <ToggleButton x:Name="networkTestButton" Content="Start Network Test" Checked="OnStartTest" Unchecked="OnStopTest"/>
+        <TextBlock x:Name="messageGoogleDNS" TextWrapping="Wrap" Margin="10" Height="100"/>
+        <TextBlock x:Name="messageGateway" TextWrapping="Wrap" Margin="10" Height="100"/>
+    </StackPanel>
+</Window>
