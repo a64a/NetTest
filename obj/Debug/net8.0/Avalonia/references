@@ -22,9 +22,6 @@
 /Users/kb/.nuget/packages/avalonia.win32/11.0.10/lib/net6.0/Avalonia.Win32.dll
 /Users/kb/.nuget/packages/avalonia.x11/11.0.10/lib/net6.0/Avalonia.X11.dll
 /Users/kb/.nuget/packages/harfbuzzsharp/7.3.0/lib/net6.0/HarfBuzzSharp.dll
-/Users/kb/.nuget/packages/livechartscore/2.0.0-rc2/lib/net6.0/LiveChartsCore.dll
-/Users/kb/.nuget/packages/livechartscore.skiasharpview.avalonia/2.0.0-rc2/lib/net6.0/LiveChartsCore.SkiaSharpView.Avalonia.dll
-/Users/kb/.nuget/packages/livechartscore.skiasharpview/2.0.0-rc2/lib/net6.0/LiveChartsCore.SkiaSharpView.dll
 /Users/kb/.nuget/packages/microcom.runtime/0.11.0/lib/net5.0/MicroCom.Runtime.dll
 /Users/kb/.nuget/packages/microsoft.codeanalysis.csharp/3.8.0/lib/netcoreapp3.1/Microsoft.CodeAnalysis.CSharp.dll
 /Users/kb/.nuget/packages/microsoft.codeanalysis.csharp.scripting/3.8.0/lib/netcoreapp3.1/Microsoft.CodeAnalysis.CSharp.Scripting.dll
@@ -35,13 +32,11 @@
 /Users/kb/.nuget/packages/microsoft.netcore.app.ref/8.0.2/ref/net8.0/Microsoft.VisualBasic.dll
 /Users/kb/.nuget/packages/microsoft.netcore.app.ref/8.0.2/ref/net8.0/Microsoft.Win32.Primitives.dll
 /Users/kb/.nuget/packages/microsoft.netcore.app.ref/8.0.2/ref/net8.0/Microsoft.Win32.Registry.dll
-/Users/kb/.nuget/packages/microsoft.win32.systemevents/8.0.0/lib/net8.0/Microsoft.Win32.SystemEvents.dll
 /Users/kb/.nuget/packages/microsoft.netcore.app.ref/8.0.2/ref/net8.0/mscorlib.dll
 /Users/kb/.nuget/packages/microsoft.netcore.app.ref/8.0.2/ref/net8.0/netstandard.dll
-/Users/kb/.nuget/packages/scottplot.avalonia/5.0.33/lib/net8.0/ScottPlot.Avalonia.dll
-/Users/kb/.nuget/packages/scottplot/5.0.33/lib/net8.0/ScottPlot.dll
-/Users/kb/.nuget/packages/skiasharp/2.88.8/lib/net6.0/SkiaSharp.dll
-/Users/kb/.nuget/packages/skiasharp.harfbuzz/2.88.6/lib/net6.0/SkiaSharp.HarfBuzz.dll
+/Users/kb/.nuget/packages/scottplot.avalonia/4.1.71/lib/net6.0/ScottPlot.Avalonia.dll
+/Users/kb/.nuget/packages/scottplot/4.1.71/lib/net6.0/ScottPlot.dll
+/Users/kb/.nuget/packages/skiasharp/2.88.7/lib/net6.0/SkiaSharp.dll
 /Users/kb/.nuget/packages/microsoft.netcore.app.ref/8.0.2/ref/net8.0/System.AppContext.dll
 /Users/kb/.nuget/packages/microsoft.netcore.app.ref/8.0.2/ref/net8.0/System.Buffers.dll
 /Users/kb/.nuget/packages/microsoft.netcore.app.ref/8.0.2/ref/net8.0/System.Collections.Concurrent.dll
@@ -72,7 +67,7 @@
 /Users/kb/.nuget/packages/microsoft.netcore.app.ref/8.0.2/ref/net8.0/System.Diagnostics.TraceSource.dll
 /Users/kb/.nuget/packages/microsoft.netcore.app.ref/8.0.2/ref/net8.0/System.Diagnostics.Tracing.dll
 /Users/kb/.nuget/packages/microsoft.netcore.app.ref/8.0.2/ref/net8.0/System.dll
-/Users/kb/.nuget/packages/system.drawing.common/8.0.4/lib/net8.0/System.Drawing.Common.dll
+/Users/kb/.nuget/packages/system.drawing.common/5.0.0/ref/netcoreapp3.0/System.Drawing.Common.dll
 /Users/kb/.nuget/packages/microsoft.netcore.app.ref/8.0.2/ref/net8.0/System.Drawing.dll
 /Users/kb/.nuget/packages/microsoft.netcore.app.ref/8.0.2/ref/net8.0/System.Drawing.Primitives.dll
 /Users/kb/.nuget/packages/microsoft.netcore.app.ref/8.0.2/ref/net8.0/System.Dynamic.Runtime.dll

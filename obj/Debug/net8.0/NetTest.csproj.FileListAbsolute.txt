@@ -128,8 +128,7 @@
 /Users/kb/NetTest/bin/Debug/net8.0/ScottPlot.dll
 /Users/kb/NetTest/bin/Debug/net8.0/ScottPlot.Avalonia.dll
 /Users/kb/NetTest/bin/Debug/net8.0/System.Drawing.Common.dll
-/Users/kb/NetTest/bin/Debug/net8.0/runtimes/win/lib/net8.0/Microsoft.Win32.SystemEvents.dll
-/Users/kb/NetTest/bin/Debug/net8.0/LiveChartsCore.dll
-/Users/kb/NetTest/bin/Debug/net8.0/LiveChartsCore.SkiaSharpView.dll
-/Users/kb/NetTest/bin/Debug/net8.0/LiveChartsCore.SkiaSharpView.Avalonia.dll
-/Users/kb/NetTest/bin/Debug/net8.0/SkiaSharp.HarfBuzz.dll
+/Users/kb/NetTest/obj/Debug/net8.0/NetTest.sourcelink.json
+/Users/kb/NetTest/bin/Debug/net8.0/runtimes/win/lib/netcoreapp3.0/Microsoft.Win32.SystemEvents.dll
+/Users/kb/NetTest/bin/Debug/net8.0/runtimes/unix/lib/netcoreapp3.0/System.Drawing.Common.dll
+/Users/kb/NetTest/bin/Debug/net8.0/runtimes/win/lib/netcoreapp3.0/System.Drawing.Common.dll

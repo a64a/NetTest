@@ -13,9 +13,8 @@
           "Avalonia.Diagnostics": "11.0.10",
           "Avalonia.Fonts.Inter": "11.0.10",
           "Avalonia.Themes.Fluent": "11.0.10",
-          "LiveChartsCore.SkiaSharpView.Avalonia": "2.0.0-rc2",
-          "ScottPlot.Avalonia": "5.0.33",
-          "System.Drawing.Common": "8.0.4"
+          "ScottPlot.Avalonia": "4.1.71",
+          "System.Drawing.Common": "5.0.0"
         },
         "runtime": {
           "NetTest.dll": {}
@@ -201,7 +200,7 @@
           "HarfBuzzSharp": "7.3.0",
           "HarfBuzzSharp.NativeAssets.Linux": "7.3.0",
           "HarfBuzzSharp.NativeAssets.WebAssembly": "7.3.0",
-          "SkiaSharp": "2.88.8",
+          "SkiaSharp": "2.88.7",
           "SkiaSharp.NativeAssets.Linux": "2.88.7",
           "SkiaSharp.NativeAssets.WebAssembly": "2.88.7"
         },
@@ -325,40 +324,6 @@
             "rid": "win-x86",
             "assetType": "native",
             "fileVersion": "0.0.0.0"
-          }
-        }
-      },
-      "LiveChartsCore/2.0.0-rc2": {
-        "runtime": {
-          "lib/net6.0/LiveChartsCore.dll": {
-            "assemblyVersion": "2.0.0.0",
-            "fileVersion": "2.0.0.0"
-          }
-        }
-      },
-      "LiveChartsCore.SkiaSharpView/2.0.0-rc2": {
-        "dependencies": {
-          "LiveChartsCore": "2.0.0-rc2",
-          "SkiaSharp": "2.88.8",
-          "SkiaSharp.HarfBuzz": "2.88.6"
-        },
-        "runtime": {
-          "lib/net6.0/LiveChartsCore.SkiaSharpView.dll": {
-            "assemblyVersion": "2.0.0.0",
-            "fileVersion": "2.0.0.0"
-          }
-        }
-      },
-      "LiveChartsCore.SkiaSharpView.Avalonia/2.0.0-rc2": {
-        "dependencies": {
-          "Avalonia": "11.0.10",
-          "Avalonia.Skia": "11.0.10",
-          "LiveChartsCore.SkiaSharpView": "2.0.0-rc2"
-        },
-        "runtime": {
-          "lib/net6.0/LiveChartsCore.SkiaSharpView.Avalonia.dll": {
-            "assemblyVersion": "2.0.0.0",
-            "fileVersion": "2.0.0.0"
           }
         }
       },
@@ -608,76 +573,66 @@
           "System.Threading": "4.3.0"
         }
       },
-      "Microsoft.NETCore.Platforms/2.1.2": {},
+      "Microsoft.NETCore.Platforms/5.0.0": {},
       "Microsoft.NETCore.Targets/1.1.0": {},
-      "Microsoft.Win32.SystemEvents/8.0.0": {
+      "Microsoft.Win32.SystemEvents/5.0.0": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "5.0.0"
+        },
         "runtime": {
-          "lib/net8.0/Microsoft.Win32.SystemEvents.dll": {
-            "assemblyVersion": "8.0.0.0",
-            "fileVersion": "8.0.23.53103"
+          "lib/netstandard2.0/Microsoft.Win32.SystemEvents.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.20.51904"
           }
         },
         "runtimeTargets": {
-          "runtimes/win/lib/net8.0/Microsoft.Win32.SystemEvents.dll": {
+          "runtimes/win/lib/netcoreapp3.0/Microsoft.Win32.SystemEvents.dll": {
             "rid": "win",
             "assetType": "runtime",
-            "assemblyVersion": "8.0.0.0",
-            "fileVersion": "8.0.23.53103"
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.20.51904"
           }
         }
       },
-      "ScottPlot/5.0.33": {
+      "ScottPlot/4.1.71": {
         "dependencies": {
-          "SkiaSharp": "2.88.8",
-          "SkiaSharp.NativeAssets.Linux.NoDependencies": "2.88.8"
+          "System.Drawing.Common": "5.0.0",
+          "System.Numerics.Vectors": "4.5.0"
         },
         "runtime": {
-          "lib/net8.0/ScottPlot.dll": {
-            "assemblyVersion": "5.0.33.0",
-            "fileVersion": "5.0.33.0"
+          "lib/net6.0/ScottPlot.dll": {
+            "assemblyVersion": "4.1.71.0",
+            "fileVersion": "4.1.71.0"
           }
         }
       },
-      "ScottPlot.Avalonia/5.0.33": {
+      "ScottPlot.Avalonia/4.1.71": {
         "dependencies": {
           "Avalonia": "11.0.10",
-          "Avalonia.Skia": "11.0.10",
-          "ScottPlot": "5.0.33"
+          "ScottPlot": "4.1.71"
         },
         "runtime": {
-          "lib/net8.0/ScottPlot.Avalonia.dll": {
-            "assemblyVersion": "5.0.33.0",
-            "fileVersion": "5.0.33.0"
+          "lib/net6.0/ScottPlot.Avalonia.dll": {
+            "assemblyVersion": "4.1.71.0",
+            "fileVersion": "4.1.71.0"
           }
         }
       },
-      "SkiaSharp/2.88.8": {
+      "SkiaSharp/2.88.7": {
         "dependencies": {
-          "SkiaSharp.NativeAssets.Win32": "2.88.8",
-          "SkiaSharp.NativeAssets.macOS": "2.88.8"
+          "SkiaSharp.NativeAssets.Win32": "2.88.7",
+          "SkiaSharp.NativeAssets.macOS": "2.88.7"
         },
         "runtime": {
           "lib/net6.0/SkiaSharp.dll": {
             "assemblyVersion": "2.88.0.0",
-            "fileVersion": "2.88.8.0"
-          }
-        }
-      },
-      "SkiaSharp.HarfBuzz/2.88.6": {
-        "dependencies": {
-          "HarfBuzzSharp": "7.3.0",
-          "SkiaSharp": "2.88.8"
-        },
-        "runtime": {
-          "lib/net6.0/SkiaSharp.HarfBuzz.dll": {
-            "assemblyVersion": "2.88.0.0",
-            "fileVersion": "2.88.6.0"
+            "fileVersion": "2.88.7.0"
           }
         }
       },
       "SkiaSharp.NativeAssets.Linux/2.88.7": {
         "dependencies": {
-          "SkiaSharp": "2.88.8"
+          "SkiaSharp": "2.88.7"
         },
         "runtimeTargets": {
           "runtimes/linux-arm/native/libSkiaSharp.so": {
@@ -702,12 +657,7 @@
           }
         }
       },
-      "SkiaSharp.NativeAssets.Linux.NoDependencies/2.88.8": {
-        "dependencies": {
-          "SkiaSharp": "2.88.8"
-        }
-      },
-      "SkiaSharp.NativeAssets.macOS/2.88.8": {
+      "SkiaSharp.NativeAssets.macOS/2.88.7": {
         "runtimeTargets": {
           "runtimes/osx/native/libSkiaSharp.dylib": {
             "rid": "osx",
@@ -717,7 +667,7 @@
         }
       },
       "SkiaSharp.NativeAssets.WebAssembly/2.88.7": {},
-      "SkiaSharp.NativeAssets.Win32/2.88.8": {
+      "SkiaSharp.NativeAssets.Win32/2.88.7": {
         "runtimeTargets": {
           "runtimes/win-arm64/native/libSkiaSharp.dll": {
             "rid": "win-arm64",
@@ -738,7 +688,7 @@
       },
       "System.Collections/4.3.0": {
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "2.1.2",
+          "Microsoft.NETCore.Platforms": "5.0.0",
           "Microsoft.NETCore.Targets": "1.1.0",
           "System.Runtime": "4.3.0"
         }
@@ -747,19 +697,33 @@
       "System.ComponentModel.Annotations/4.5.0": {},
       "System.Diagnostics.Debug/4.3.0": {
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "2.1.2",
+          "Microsoft.NETCore.Platforms": "5.0.0",
           "Microsoft.NETCore.Targets": "1.1.0",
           "System.Runtime": "4.3.0"
         }
       },
-      "System.Drawing.Common/8.0.4": {
+      "System.Drawing.Common/5.0.0": {
         "dependencies": {
-          "Microsoft.Win32.SystemEvents": "8.0.0"
+          "Microsoft.Win32.SystemEvents": "5.0.0"
         },
         "runtime": {
-          "lib/net8.0/System.Drawing.Common.dll": {
-            "assemblyVersion": "8.0.0.0",
-            "fileVersion": "8.0.424.16911"
+          "lib/netcoreapp3.0/System.Drawing.Common.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.20.51904"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/unix/lib/netcoreapp3.0/System.Drawing.Common.dll": {
+            "rid": "unix",
+            "assetType": "runtime",
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.20.51904"
+          },
+          "runtimes/win/lib/netcoreapp3.0/System.Drawing.Common.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.20.51904"
           }
         }
       },
@@ -783,14 +747,14 @@
       },
       "System.Globalization/4.3.0": {
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "2.1.2",
+          "Microsoft.NETCore.Platforms": "5.0.0",
           "Microsoft.NETCore.Targets": "1.1.0",
           "System.Runtime": "4.3.0"
         }
       },
       "System.IO/4.3.0": {
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "2.1.2",
+          "Microsoft.NETCore.Platforms": "5.0.0",
           "Microsoft.NETCore.Targets": "1.1.0",
           "System.Runtime": "4.3.0",
           "System.Text.Encoding": "4.3.0",
@@ -848,7 +812,7 @@
       },
       "System.Reflection/4.3.0": {
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "2.1.2",
+          "Microsoft.NETCore.Platforms": "5.0.0",
           "Microsoft.NETCore.Targets": "1.1.0",
           "System.IO": "4.3.0",
           "System.Reflection.Primitives": "4.3.0",
@@ -881,7 +845,7 @@
       },
       "System.Reflection.Extensions/4.3.0": {
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "2.1.2",
+          "Microsoft.NETCore.Platforms": "5.0.0",
           "Microsoft.NETCore.Targets": "1.1.0",
           "System.Reflection": "4.3.0",
           "System.Runtime": "4.3.0"
@@ -890,7 +854,7 @@
       "System.Reflection.Metadata/5.0.0": {},
       "System.Reflection.Primitives/4.3.0": {
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "2.1.2",
+          "Microsoft.NETCore.Platforms": "5.0.0",
           "Microsoft.NETCore.Targets": "1.1.0",
           "System.Runtime": "4.3.0"
         }
@@ -903,7 +867,7 @@
       },
       "System.Resources.ResourceManager/4.3.0": {
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "2.1.2",
+          "Microsoft.NETCore.Platforms": "5.0.0",
           "Microsoft.NETCore.Targets": "1.1.0",
           "System.Globalization": "4.3.0",
           "System.Reflection": "4.3.0",
@@ -912,28 +876,28 @@
       },
       "System.Runtime/4.3.0": {
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "2.1.2",
+          "Microsoft.NETCore.Platforms": "5.0.0",
           "Microsoft.NETCore.Targets": "1.1.0"
         }
       },
       "System.Runtime.CompilerServices.Unsafe/4.7.1": {},
       "System.Runtime.Extensions/4.3.0": {
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "2.1.2",
+          "Microsoft.NETCore.Platforms": "5.0.0",
           "Microsoft.NETCore.Targets": "1.1.0",
           "System.Runtime": "4.3.0"
         }
       },
       "System.Runtime.Handles/4.3.0": {
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "2.1.2",
+          "Microsoft.NETCore.Platforms": "5.0.0",
           "Microsoft.NETCore.Targets": "1.1.0",
           "System.Runtime": "4.3.0"
         }
       },
       "System.Runtime.InteropServices/4.3.0": {
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "2.1.2",
+          "Microsoft.NETCore.Platforms": "5.0.0",
           "Microsoft.NETCore.Targets": "1.1.0",
           "System.Reflection": "4.3.0",
           "System.Reflection.Primitives": "4.3.0",
@@ -943,14 +907,14 @@
       },
       "System.Text.Encoding/4.3.0": {
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "2.1.2",
+          "Microsoft.NETCore.Platforms": "5.0.0",
           "Microsoft.NETCore.Targets": "1.1.0",
           "System.Runtime": "4.3.0"
         }
       },
       "System.Text.Encoding.CodePages/4.5.1": {
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "2.1.2",
+          "Microsoft.NETCore.Platforms": "5.0.0",
           "System.Runtime.CompilerServices.Unsafe": "4.7.1"
         }
       },
@@ -962,7 +926,7 @@
       },
       "System.Threading.Tasks/4.3.0": {
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "2.1.2",
+          "Microsoft.NETCore.Platforms": "5.0.0",
           "Microsoft.NETCore.Targets": "1.1.0",
           "System.Runtime": "4.3.0"
         }
@@ -1134,27 +1098,6 @@
       "path": "harfbuzzsharp.nativeassets.win32/7.3.0",
       "hashPath": "harfbuzzsharp.nativeassets.win32.7.3.0.nupkg.sha512"
     },
-    "LiveChartsCore/2.0.0-rc2": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-X55dG3oI3AVOGWUrly+J/bUJGmb/pmB2aTkaWJPyIXI2cr5cqPJG/6GLL17IJ8e3GOofFWgQCbg0Az0+myUQLg==",
-      "path": "livechartscore/2.0.0-rc2",
-      "hashPath": "livechartscore.2.0.0-rc2.nupkg.sha512"
-    },
-    "LiveChartsCore.SkiaSharpView/2.0.0-rc2": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-UVvUa7QAlyiPLuCjcoMKr4dI1FIUE5xW/XjcioSXgsOoqZg0E6Fq3B9k5t6MjIVE6dUU2F3tZwdm5KDiNftQ2A==",
-      "path": "livechartscore.skiasharpview/2.0.0-rc2",
-      "hashPath": "livechartscore.skiasharpview.2.0.0-rc2.nupkg.sha512"
-    },
-    "LiveChartsCore.SkiaSharpView.Avalonia/2.0.0-rc2": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-1ykqsUd8qKP2Iste0cnRa+mpnC49IHElE5saz8y+eeYynfTLo15YhnPJGWGit4mdvrWIQgT/1QCcE26tfdKvDw==",
-      "path": "livechartscore.skiasharpview.avalonia/2.0.0-rc2",
-      "hashPath": "livechartscore.skiasharpview.avalonia.2.0.0-rc2.nupkg.sha512"
-    },
     "MicroCom.Runtime/0.11.0": {
       "type": "package",
       "serviceable": true,
@@ -1204,12 +1147,12 @@
       "path": "microsoft.csharp/4.3.0",
       "hashPath": "microsoft.csharp.4.3.0.nupkg.sha512"
     },
-    "Microsoft.NETCore.Platforms/2.1.2": {
+    "Microsoft.NETCore.Platforms/5.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-mOJy3M0UN+LUG21dLGMxaWZEP6xYpQEpLuvuEQBaownaX4YuhH6NmNUlN9si+vNkAS6dwJ//N1O4DmLf2CikVg==",
-      "path": "microsoft.netcore.platforms/2.1.2",
-      "hashPath": "microsoft.netcore.platforms.2.1.2.nupkg.sha512"
+      "sha512": "sha512-VyPlqzH2wavqquTcYpkIIAQ6WdenuKoFN0BdYBbCWsclXacSOHNQn66Gt4z5NBqEYW0FAPm5rlvki9ZiCij5xQ==",
+      "path": "microsoft.netcore.platforms/5.0.0",
+      "hashPath": "microsoft.netcore.platforms.5.0.0.nupkg.sha512"
     },
     "Microsoft.NETCore.Targets/1.1.0": {
       "type": "package",
@@ -1218,40 +1161,33 @@
       "path": "microsoft.netcore.targets/1.1.0",
       "hashPath": "microsoft.netcore.targets.1.1.0.nupkg.sha512"
     },
-    "Microsoft.Win32.SystemEvents/8.0.0": {
+    "Microsoft.Win32.SystemEvents/5.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-9opKRyOKMCi2xJ7Bj7kxtZ1r9vbzosMvRrdEhVhDz8j8MoBGgB+WmC94yH839NPH+BclAjtQ/pyagvi/8gDLkw==",
-      "path": "microsoft.win32.systemevents/8.0.0",
-      "hashPath": "microsoft.win32.systemevents.8.0.0.nupkg.sha512"
+      "sha512": "sha512-Bh6blKG8VAKvXiLe2L+sEsn62nc1Ij34MrNxepD2OCrS5cpCwQa9MeLyhVQPQ/R4Wlzwuy6wMK8hLb11QPDRsQ==",
+      "path": "microsoft.win32.systemevents/5.0.0",
+      "hashPath": "microsoft.win32.systemevents.5.0.0.nupkg.sha512"
     },
-    "ScottPlot/5.0.33": {
+    "ScottPlot/4.1.71": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-pzmJvpk36axsdrxbzQ5Rh5CMcu6fG6SAntTlsh/mnW6002VAHm85baRCL559+ofkxgyceGwLLSteVSbh/axjDg==",
-      "path": "scottplot/5.0.33",
-      "hashPath": "scottplot.5.0.33.nupkg.sha512"
+      "sha512": "sha512-Spzmtz4XwtHxsBifGS+7fMHK8JPI4fgVxzeFu4bPck0ZxlWbXohKUkgi0g3NZb0G4I/AVN83BElA/+NWBiRDsQ==",
+      "path": "scottplot/4.1.71",
+      "hashPath": "scottplot.4.1.71.nupkg.sha512"
     },
-    "ScottPlot.Avalonia/5.0.33": {
+    "ScottPlot.Avalonia/4.1.71": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-v5c8miF4y2FgxpajgglXp4vTNhlS0rA3y2roDBgFLcApSX4RdDbKppnp/H7KUwVOrwXqsPRJ0DREhWiJ8xTdIQ==",
-      "path": "scottplot.avalonia/5.0.33",
-      "hashPath": "scottplot.avalonia.5.0.33.nupkg.sha512"
+      "sha512": "sha512-MUV8DlvcZIk1oFdzjcpg5tnQKSs7301vs7bIypIbNeYmykshUYryq9IXadse5OwCnntPesGgqQgODNGzRNWOYg==",
+      "path": "scottplot.avalonia/4.1.71",
+      "hashPath": "scottplot.avalonia.4.1.71.nupkg.sha512"
     },
-    "SkiaSharp/2.88.8": {
+    "SkiaSharp/2.88.7": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-bRkp3uKp5ZI8gXYQT57uKwil1uobb2p8c69n7v5evlB/2JNcMAXVcw9DZAP5Ig3WSvgzGm2YSn27UVeOi05NlA==",
-      "path": "skiasharp/2.88.8",
-      "hashPath": "skiasharp.2.88.8.nupkg.sha512"
-    },
-    "SkiaSharp.HarfBuzz/2.88.6": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-s5yZTHdqbXKiTL06ns6zW3asELfX60dEceA4ZdYmNlOkz/OyWDfdjHAuu4HGDA7Mxx5iaUEzDZgPkEe+OVr/jg==",
-      "path": "skiasharp.harfbuzz/2.88.6",
-      "hashPath": "skiasharp.harfbuzz.2.88.6.nupkg.sha512"
+      "sha512": "sha512-LJHAMrbWO00J7jXWLWehyjqFo29T4VzABimfJb4nICqpEe3c/KvQGWL4ItON8ymzhxYOeFgyxeRzuNzO4GHSug==",
+      "path": "skiasharp/2.88.7",
+      "hashPath": "skiasharp.2.88.7.nupkg.sha512"
     },
     "SkiaSharp.NativeAssets.Linux/2.88.7": {
       "type": "package",
@@ -1260,19 +1196,12 @@
       "path": "skiasharp.nativeassets.linux/2.88.7",
       "hashPath": "skiasharp.nativeassets.linux.2.88.7.nupkg.sha512"
     },
-    "SkiaSharp.NativeAssets.Linux.NoDependencies/2.88.8": {
+    "SkiaSharp.NativeAssets.macOS/2.88.7": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-/DoKtdyvRgCC5GR/SH+ps3ZiOjmf0BYpAyrhWQELFOO1hdcqddrDVJjDNCOJ41vV+NlS5b3kcDoZZ7jLhFjyXg==",
-      "path": "skiasharp.nativeassets.linux.nodependencies/2.88.8",
-      "hashPath": "skiasharp.nativeassets.linux.nodependencies.2.88.8.nupkg.sha512"
-    },
-    "SkiaSharp.NativeAssets.macOS/2.88.8": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-6Kn5TSkKlfyS6azWHF3Jk2sW5C4jCE5uSshM/5AbfFrR+5n6qM5XEnz9h4VaVl7LTxBvHvMkuPb/3bpbq0vxTw==",
-      "path": "skiasharp.nativeassets.macos/2.88.8",
-      "hashPath": "skiasharp.nativeassets.macos.2.88.8.nupkg.sha512"
+      "sha512": "sha512-3jNzco4VjcYPFNxR9aNWcgweFXbTSdM1VpNRzCS4X0i1A1OuNqcaulrAvmntNpujeWxHo9e6WGh6FN8Jf5+XhA==",
+      "path": "skiasharp.nativeassets.macos/2.88.7",
+      "hashPath": "skiasharp.nativeassets.macos.2.88.7.nupkg.sha512"
     },
     "SkiaSharp.NativeAssets.WebAssembly/2.88.7": {
       "type": "package",
@@ -1281,12 +1210,12 @@
       "path": "skiasharp.nativeassets.webassembly/2.88.7",
       "hashPath": "skiasharp.nativeassets.webassembly.2.88.7.nupkg.sha512"
     },
-    "SkiaSharp.NativeAssets.Win32/2.88.8": {
+    "SkiaSharp.NativeAssets.Win32/2.88.7": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-O9QXoWEXA+6cweR4h3BOnwMz+pO9vL9mXdjLrpDd0w1QzCgWmLQBxa1VgySDITiH7nQndrDG1h6937zm9pLj1Q==",
-      "path": "skiasharp.nativeassets.win32/2.88.8",
-      "hashPath": "skiasharp.nativeassets.win32.2.88.8.nupkg.sha512"
+      "sha512": "sha512-BCXmWdQ0oVck9vRwC8U3ocSaTHEx28VB+6qw9OxGIMQ86iO5bp4Flqk3IXH0l9Pbr7vWAUOpI212iaL9mTaUZQ==",
+      "path": "skiasharp.nativeassets.win32/2.88.7",
+      "hashPath": "skiasharp.nativeassets.win32.2.88.7.nupkg.sha512"
     },
     "System.Collections/4.3.0": {
       "type": "package",
@@ -1316,12 +1245,12 @@
       "path": "system.diagnostics.debug/4.3.0",
       "hashPath": "system.diagnostics.debug.4.3.0.nupkg.sha512"
     },
-    "System.Drawing.Common/8.0.4": {
+    "System.Drawing.Common/5.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-3G4xpa8mUYGzEF0HlswlBArAFywHJIzsZoB5hU4yMlnYHaabj/lg019BwbyyYBxj0aoM7Cz+jdlgUemeno9LOQ==",
-      "path": "system.drawing.common/8.0.4",
-      "hashPath": "system.drawing.common.8.0.4.nupkg.sha512"
+      "sha512": "sha512-SztFwAnpfKC8+sEKXAFxCBWhKQaEd97EiOL7oZJZP56zbqnLpmxACWA8aGseaUExciuEAUuR9dY8f7HkTRAdnw==",
+      "path": "system.drawing.common/5.0.0",
+      "hashPath": "system.drawing.common.5.0.0.nupkg.sha512"
     },
     "System.Dynamic.Runtime/4.3.0": {
       "type": "package",

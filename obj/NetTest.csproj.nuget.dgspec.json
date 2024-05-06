@@ -63,17 +63,13 @@
               "target": "Package",
               "version": "[11.0.10, )"
             },
-            "LiveChartsCore.SkiaSharpView.Avalonia": {
-              "target": "Package",
-              "version": "[2.0.0-rc2, )"
-            },
             "ScottPlot.Avalonia": {
               "target": "Package",
-              "version": "[5.0.33, )"
+              "version": "[4.1.71, )"
             },
             "System.Drawing.Common": {
               "target": "Package",
-              "version": "[8.0.4, )"
+              "version": "[5.0.0, )"
             }
           },
           "imports": [

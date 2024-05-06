@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "MgP7PpMnkJY=",
+  "dgSpecHash": "anwDgJ1VkWg=",
   "success": true,
   "projectFilePath": "/Users/kb/NetTest/NetTest.csproj",
   "expectedPackageFiles": [
@@ -25,9 +25,6 @@
     "/Users/kb/.nuget/packages/harfbuzzsharp.nativeassets.macos/7.3.0/harfbuzzsharp.nativeassets.macos.7.3.0.nupkg.sha512",
     "/Users/kb/.nuget/packages/harfbuzzsharp.nativeassets.webassembly/7.3.0/harfbuzzsharp.nativeassets.webassembly.7.3.0.nupkg.sha512",
     "/Users/kb/.nuget/packages/harfbuzzsharp.nativeassets.win32/7.3.0/harfbuzzsharp.nativeassets.win32.7.3.0.nupkg.sha512",
-    "/Users/kb/.nuget/packages/livechartscore/2.0.0-rc2/livechartscore.2.0.0-rc2.nupkg.sha512",
-    "/Users/kb/.nuget/packages/livechartscore.skiasharpview/2.0.0-rc2/livechartscore.skiasharpview.2.0.0-rc2.nupkg.sha512",
-    "/Users/kb/.nuget/packages/livechartscore.skiasharpview.avalonia/2.0.0-rc2/livechartscore.skiasharpview.avalonia.2.0.0-rc2.nupkg.sha512",
     "/Users/kb/.nuget/packages/microcom.runtime/0.11.0/microcom.runtime.0.11.0.nupkg.sha512",
     "/Users/kb/.nuget/packages/microsoft.codeanalysis.analyzers/3.0.0/microsoft.codeanalysis.analyzers.3.0.0.nupkg.sha512",
     "/Users/kb/.nuget/packages/microsoft.codeanalysis.common/3.8.0/microsoft.codeanalysis.common.3.8.0.nupkg.sha512",
@@ -35,23 +32,21 @@
     "/Users/kb/.nuget/packages/microsoft.codeanalysis.csharp.scripting/3.8.0/microsoft.codeanalysis.csharp.scripting.3.8.0.nupkg.sha512",
     "/Users/kb/.nuget/packages/microsoft.codeanalysis.scripting.common/3.8.0/microsoft.codeanalysis.scripting.common.3.8.0.nupkg.sha512",
     "/Users/kb/.nuget/packages/microsoft.csharp/4.3.0/microsoft.csharp.4.3.0.nupkg.sha512",
-    "/Users/kb/.nuget/packages/microsoft.netcore.platforms/2.1.2/microsoft.netcore.platforms.2.1.2.nupkg.sha512",
+    "/Users/kb/.nuget/packages/microsoft.netcore.platforms/5.0.0/microsoft.netcore.platforms.5.0.0.nupkg.sha512",
     "/Users/kb/.nuget/packages/microsoft.netcore.targets/1.1.0/microsoft.netcore.targets.1.1.0.nupkg.sha512",
-    "/Users/kb/.nuget/packages/microsoft.win32.systemevents/8.0.0/microsoft.win32.systemevents.8.0.0.nupkg.sha512",
-    "/Users/kb/.nuget/packages/scottplot/5.0.33/scottplot.5.0.33.nupkg.sha512",
-    "/Users/kb/.nuget/packages/scottplot.avalonia/5.0.33/scottplot.avalonia.5.0.33.nupkg.sha512",
-    "/Users/kb/.nuget/packages/skiasharp/2.88.8/skiasharp.2.88.8.nupkg.sha512",
-    "/Users/kb/.nuget/packages/skiasharp.harfbuzz/2.88.6/skiasharp.harfbuzz.2.88.6.nupkg.sha512",
+    "/Users/kb/.nuget/packages/microsoft.win32.systemevents/5.0.0/microsoft.win32.systemevents.5.0.0.nupkg.sha512",
+    "/Users/kb/.nuget/packages/scottplot/4.1.71/scottplot.4.1.71.nupkg.sha512",
+    "/Users/kb/.nuget/packages/scottplot.avalonia/4.1.71/scottplot.avalonia.4.1.71.nupkg.sha512",
+    "/Users/kb/.nuget/packages/skiasharp/2.88.7/skiasharp.2.88.7.nupkg.sha512",
     "/Users/kb/.nuget/packages/skiasharp.nativeassets.linux/2.88.7/skiasharp.nativeassets.linux.2.88.7.nupkg.sha512",
-    "/Users/kb/.nuget/packages/skiasharp.nativeassets.linux.nodependencies/2.88.8/skiasharp.nativeassets.linux.nodependencies.2.88.8.nupkg.sha512",
-    "/Users/kb/.nuget/packages/skiasharp.nativeassets.macos/2.88.8/skiasharp.nativeassets.macos.2.88.8.nupkg.sha512",
+    "/Users/kb/.nuget/packages/skiasharp.nativeassets.macos/2.88.7/skiasharp.nativeassets.macos.2.88.7.nupkg.sha512",
     "/Users/kb/.nuget/packages/skiasharp.nativeassets.webassembly/2.88.7/skiasharp.nativeassets.webassembly.2.88.7.nupkg.sha512",
-    "/Users/kb/.nuget/packages/skiasharp.nativeassets.win32/2.88.8/skiasharp.nativeassets.win32.2.88.8.nupkg.sha512",
+    "/Users/kb/.nuget/packages/skiasharp.nativeassets.win32/2.88.7/skiasharp.nativeassets.win32.2.88.7.nupkg.sha512",
     "/Users/kb/.nuget/packages/system.collections/4.3.0/system.collections.4.3.0.nupkg.sha512",
     "/Users/kb/.nuget/packages/system.collections.immutable/5.0.0/system.collections.immutable.5.0.0.nupkg.sha512",
     "/Users/kb/.nuget/packages/system.componentmodel.annotations/4.5.0/system.componentmodel.annotations.4.5.0.nupkg.sha512",
     "/Users/kb/.nuget/packages/system.diagnostics.debug/4.3.0/system.diagnostics.debug.4.3.0.nupkg.sha512",
-    "/Users/kb/.nuget/packages/system.drawing.common/8.0.4/system.drawing.common.8.0.4.nupkg.sha512",
+    "/Users/kb/.nuget/packages/system.drawing.common/5.0.0/system.drawing.common.5.0.0.nupkg.sha512",
     "/Users/kb/.nuget/packages/system.dynamic.runtime/4.3.0/system.dynamic.runtime.4.3.0.nupkg.sha512",
     "/Users/kb/.nuget/packages/system.globalization/4.3.0/system.globalization.4.3.0.nupkg.sha512",
     "/Users/kb/.nuget/packages/system.io/4.3.0/system.io.4.3.0.nupkg.sha512",
@@ -85,5 +80,16 @@
     "/Users/kb/.nuget/packages/microsoft.netcore.app.host.osx-arm64/8.0.2/microsoft.netcore.app.host.osx-arm64.8.0.2.nupkg.sha512",
     "/Users/kb/.nuget/packages/microsoft.netcore.app.ref/8.0.2/microsoft.netcore.app.ref.8.0.2.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1904",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'System.Drawing.Common' 5.0.0 has a known critical severity vulnerability, https://github.com/advisories/GHSA-rxg9-xrhp-64gj",
+      "libraryId": "System.Drawing.Common",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    }
+  ]
 }
