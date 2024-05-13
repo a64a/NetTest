@@ -10,6 +10,7 @@ using Avalonia.Interactivity;
 using Avalonia.Threading;
 using System.Collections.Generic;
 using ScottPlot;
+using System.Drawing;
 
 namespace NetTest
 {
@@ -75,6 +76,7 @@ namespace NetTest
 
         private async void StartContinuousPing(string? ipAddress, TextBlock targetTextBlock)
         {
+
             while (!cts.Token.IsCancellationRequested)
             {
                 await Task.Delay(PingInterval);
@@ -199,9 +201,19 @@ namespace NetTest
         {
             if (IsNetworkConnected())
             {
+                var plt = pingPlot.Plot;
                 string folderPath = "logs";
                 string filename = Path.Combine(folderPath, $"FailedPings_{DateTime.Now:yyyyMMdd_HH}.txt");
                 string logEntry = $"[{DateTime.Now}] Ping to {ipAddress} failed: {errorMessage}";
+
+                double lostPingX = plotIndex / 4.0;
+                double previousPingX = plotIndex > 0 ? (plotIndex - 1) / 4.0 : 0;
+                var span = plt.AddHorizontalSpan(previousPingX, lostPingX);
+                span.Color = System.Drawing.Color.FromArgb(100, System.Drawing.Color.Yellow);
+                span.HatchColor = Color.Blue;
+                span.HatchStyle = ScottPlot.Drawing.HatchStyle.SmallCheckerBoard;
+                plotIndex++;
+                pingPlot.Render();
 
                 try
                 {
@@ -253,6 +265,12 @@ namespace NetTest
             pingPlot.Render();
         }
 
+
+
+
+
+
+
         private void UpdateUIText(TextBlock targetTextBlock, string text)
         {
             Dispatcher.UIThread.InvokeAsync(() =>
@@ -286,45 +304,13 @@ namespace NetTest
                 StartContinuousPing(gatewayAddress, messageGateway);
             }
 
-            resetButton.IsEnabled = true;  // Enable the reset button
         }
 
         private void OnStopTest(object sender, RoutedEventArgs e)
         {
             cts?.Cancel();
-            resetButton.IsEnabled = false;
         }
 
-        private void OnReset(object sender, RoutedEventArgs e)
-        {
-            cts?.TryReset();
-
-            ResetPlot();
-            sessionStartTime = DateTime.Now;
-            totalPingsLost = 0;
-            totalPingsSuccessful = 0;
-
-#pragma warning disable CS8602
-#pragma warning disable CS8600
-            var selectedServer = ((ComboBoxItem)serverSelector.SelectedItem).Content.ToString();
-#pragma warning restore CS8600
-#pragma warning restore CS8602
-#pragma warning disable CS8604
-            var ipAddress = serverIPs[selectedServer];
-#pragma warning restore CS8604
-            string? gatewayAddress = GetDefaultGateway()?.ToString();
-            cts = new CancellationTokenSource();
-
-            if (string.IsNullOrEmpty(gatewayAddress))
-            {
-                UpdateUIText(messageGateway, "Not connected to any network");
-            }
-            else
-            {
-                StartContinuousPing(ipAddress, messageGoogleDNS);
-                StartContinuousPing(gatewayAddress, messageGateway);
-            }
-        }
         private async void OnSendRapport(object sender, RoutedEventArgs e)
         {
 
@@ -356,7 +342,6 @@ namespace NetTest
             }
 
             cts.Cancel();
-            resetButton.IsEnabled = false;
         }
     }
 }

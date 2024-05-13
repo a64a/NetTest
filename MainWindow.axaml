@@ -18,11 +18,6 @@
                     <Image Source="Assets/poweroff.ico" Width="30" Height="30"/>
                 </ToggleButton.Content>
             </ToggleButton>
-            <Button x:Name="resetButton" Click="OnReset" IsEnabled="False" Foreground="White" Margin="10">
-                <Button.Content>
-                    <Image Source="Assets/reset.ico" Width="30" Height="30"/>
-                </Button.Content>
-            </Button>
             <Button Click="OnSendRapport" Foreground="White" Margin="10">
                 <Button.Content>
                     <Image Source="Assets/Fax.ico" Width="30" Height="30"/>
