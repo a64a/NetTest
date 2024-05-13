@@ -10,13 +10,12 @@ using Avalonia.Interactivity;
 using Avalonia.Threading;
 using System.Collections.Generic;
 using ScottPlot;
-using System.Drawing.Printing;
 
 namespace NetTest
 {
     public partial class MainWindow : Window
     {
-        private Dictionary<string, string> serverIPs = new Dictionary<string, string>()
+        private readonly Dictionary<string, string> serverIPs = new Dictionary<string, string>()
         {
             { "Google DNS", "8.8.8.8" },
             { "OpenDNS", "208.67.222.222" },
@@ -24,12 +23,10 @@ namespace NetTest
         };
 
         private DateTime sessionStartTime;
-        private int totalPingsSent = 0;
-        private int totalPingsLost = 0;
-        private int totalPingsReceived = 0;
+        private int totalPingsLost;
+        private int totalPingsSuccessful;
         private CancellationTokenSource cts;
-        private const string GoogleDnsIp = "8.8.8.8";
-        private int plotIndex = 0;
+        private int plotIndex;
         private double[] xGateway = new double[2000];
         private double[] yGateway = new double[2000];
         private double[] xGoogleDNS = new double[2000];
@@ -37,12 +34,24 @@ namespace NetTest
         private ScottPlot.Plottable.ScatterPlot plotGateway;
         private ScottPlot.Plottable.ScatterPlot plotGoogleDNS;
         private DateTime lastResetTime;
+        private const int MaxPlotPoints = 2000;
+        private const int PingInterval = 500;
+        private const int ResetIntervalSeconds = 100;
 
+#pragma warning disable CS8618
         public MainWindow()
+#pragma warning restore CS8618
         {
             InitializeComponent();
             cts = new CancellationTokenSource();
 
+            InitializePlot();
+
+            lastResetTime = sessionStartTime = DateTime.Now;
+        }
+
+        private void InitializePlot()
+        {
             var plt = pingPlot.Plot;
             plt.Grid(enable: true);
             plt.YAxis.SetBoundary(0, 1000);
@@ -62,169 +71,85 @@ namespace NetTest
             legend.Location = Alignment.UpperCenter;
             legend.Orientation = Orientation.Horizontal;
             plt.Legend();
-
-            lastResetTime = DateTime.Now;
-            sessionStartTime = DateTime.Now;
         }
 
-        private void OnStartTest(object sender, RoutedEventArgs e)
+        private async void StartContinuousPing(string? ipAddress, TextBlock targetTextBlock)
         {
-            cts = new CancellationTokenSource();
-
-            var selectedServer = ((ComboBoxItem)serverSelector.SelectedItem).Content.ToString();
-            var ipAddress = serverIPs[selectedServer];
-
-            string? gatewayAddress = GetDefaultGateway()?.ToString();
-            if (string.IsNullOrEmpty(gatewayAddress))
+            while (!cts.Token.IsCancellationRequested)
             {
-                messageGateway.Text = "Not connected to any network";
+                await Task.Delay(PingInterval);
+
+                if (!IsNetworkConnected())
+                {
+                    UpdateUIText(targetTextBlock, "Not connected to any network");
+                }
+
+                using (Ping myPing = new Ping())
+                {
+                    try
+                    {
+#pragma warning disable CS8604
+                        var reply = await myPing.SendPingAsync(ipAddress, 1000);
+#pragma warning restore CS8604
+                        if (reply != null)
+                        {
+                            UpdatePingStats(reply.Status == IPStatus.Success);
+                            UpdateUIForPingReply(reply, targetTextBlock, ipAddress);
+                        }
+                    }
+                    catch (PingException ex)
+                    {
+                        UpdateUIText(targetTextBlock, $"Error: {ex.Message}");
+                        totalPingsLost++;
+#pragma warning disable CS8604
+                        SaveFailedPing(ipAddress, ex.Message);
+#pragma warning restore CS8604
+                    }
+                }
+
+                CheckAndResetPlot();
+                UpdateSessionInfo();
             }
+        }
+
+        private void UpdatePingStats(bool isSuccess)
+        {
+            if (isSuccess)
+                totalPingsSuccessful++;
             else
-            {
-                StartContinuousPing(ipAddress, cts.Token, messageGoogleDNS);
-                StartContinuousPing(gatewayAddress, cts.Token, messageGateway);
-            }
-
-            resetButton.IsEnabled = true;  // Enable the reset button
+                totalPingsLost++;
         }
 
-        private void OnStopTest(object sender, RoutedEventArgs e)
+        private void UpdateUIForPingReply(PingReply reply, TextBlock targetTextBlock, string ipAddress)
         {
-            cts.Cancel();
-            resetButton.IsEnabled = false;
-        }
-
-        private void OnReset(object sender, RoutedEventArgs e)
-        {
-            if (cts != null && !cts.IsCancellationRequested)
+            Dispatcher.UIThread.InvokeAsync(() =>
             {
-                ResetPlot();
-
-                sessionStartTime = DateTime.Now;
-                totalPingsSent = 0;
-                totalPingsLost = 0;
-                totalPingsReceived = 0;
-
-                var selectedServer = ((ComboBoxItem)serverSelector.SelectedItem).Content.ToString();
-                var ipAddress = serverIPs[selectedServer];
-                string? gatewayAddress = GetDefaultGateway()?.ToString();
-                if (string.IsNullOrEmpty(gatewayAddress))
-                {
-                    messageGateway.Text = "Not connected to any network";
-                }
-                else
-                {
-                    StartContinuousPing(ipAddress, cts.Token, messageGoogleDNS);
-                    StartContinuousPing(gatewayAddress, cts.Token, messageGateway);
-                }
-            }
+                string statusMessage = reply.Status == IPStatus.Success ? "Success" : "Failure";
+                double packetLossPercentage = totalPingsSuccessful > 0 ? Math.Round(((double)totalPingsLost / (totalPingsSuccessful + totalPingsLost)) * 100, 2) : 0;
+                targetTextBlock.Text = $"Pinging {ipAddress} - Status: {statusMessage}, Time: {reply.RoundtripTime} ms, Address: {reply.Address}, Packet loss: {packetLossPercentage}%";
+                UpdatePlot(reply.RoundtripTime, ipAddress == GetDefaultGateway()?.ToString());
+            });
         }
 
         private void UpdateSessionInfo()
         {
             TimeSpan sessionDuration = DateTime.Now - sessionStartTime;
             string sessionDurationString = sessionDuration.ToString(@"hh\:mm\:ss");
+            double packetLossPercentage = totalPingsSuccessful > 0 ? Math.Round(((double)totalPingsLost / (totalPingsSuccessful + totalPingsLost)) * 100, 2) : 0;
             string sessionInfoText = $"Session duration: {sessionDurationString}" +
-                $" Pings sent: {totalPingsSent}" +
+                $" Pings successful: {totalPingsSuccessful}" +
                 $" Pings lost: {totalPingsLost}" +
-                $" Packet loss: {((double)totalPingsLost / totalPingsSent) * 100}%";
+                $" Packet loss: {packetLossPercentage}%";
 
             pingSessionInfo.Text = sessionInfoText;
         }
 
-
-        private async void OnSendRapport(object sender, RoutedEventArgs e)
+        private void CheckAndResetPlot()
         {
-            string rapport = $"Session duration: {(DateTime.Now - sessionStartTime).ToString(@"hh\:mm\:ss")}" +
-                $" Pings sent: {totalPingsSent}" +
-                $" Pings lost: {totalPingsLost}" +
-                $" Packet loss: {((double)totalPingsLost / totalPingsSent) * 100}%";
-
-            string folderPath = "logs";
-            string filename = Path.Combine(folderPath, $"FailedPings_{DateTime.Now:yyyyMMdd_HH}.txt");
-
-            try
+            if ((DateTime.Now - lastResetTime).TotalSeconds > ResetIntervalSeconds)
             {
-                if (!Directory.Exists(folderPath))
-                {
-                    Directory.CreateDirectory(folderPath);
-                }
-
-                using (StreamWriter writer = File.AppendText(filename))
-                {
-                    await writer.WriteLineAsync($"# Rapport generated at {DateTime.Now}");
-                    await writer.WriteLineAsync($"# {rapport}");
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error saving rapport: {ex.Message}");
-            }
-
-            cts.Cancel();
-            resetButton.IsEnabled = false;
-        }
-
-
-        private async void StartContinuousPing(string? ipAddress, CancellationToken token, TextBlock targetTextBlock)
-        {
-            while (!token.IsCancellationRequested)
-            {
-                using (Ping myPing = new Ping())
-                {
-                    try
-                    {
-                        totalPingsSent++;
-
-                        PingReply reply = await myPing.SendPingAsync(ipAddress, 1000);
-                        if (reply != null)
-                        {
-                            UpdatePingStats(reply.Status == IPStatus.Success);
-
-                            await Dispatcher.UIThread.InvokeAsync(() =>
-                            {
-                                string statusMessage = reply.Status == IPStatus.Success ? "Success" : "Failure";
-                                targetTextBlock.Text = $"Pinging {ipAddress} - Status: {statusMessage}, Time: {reply.RoundtripTime} ms, Address: {reply.Address}, Packet Loss: {((double)totalPingsLost / totalPingsSent) * 100}%";
-                                UpdatePlot(reply.RoundtripTime, ipAddress == GetDefaultGateway()?.ToString());
-                            });
-                        }
-                        await Task.Delay(500);
-                    }
-                    catch (PingException ex)
-                    {
-                        await Dispatcher.UIThread.InvokeAsync(() =>
-                        {
-                            targetTextBlock.Text = $"Error: {ex.Message}";
-                        });
-
-                        SaveFailedPing(ipAddress, ex.Message);
-
-                        await Task.Delay(500);
-                    }
-                }
-                if ((DateTime.Now - lastResetTime).TotalSeconds > 100)
-                {
-                    ResetPlot();
-                    lastResetTime = DateTime.Now;
-                }
-
-                UpdateSessionInfo();
-            }
-        }
-
-
-
-
-        private void UpdatePingStats(bool isSuccess)
-        {
-            totalPingsSent++;
-            if (!isSuccess)
-            {
-                totalPingsLost++;
-            }
-            else
-            {
-                totalPingsReceived++;
+                ResetPlot();
+                lastResetTime = DateTime.Now;
             }
         }
 
@@ -256,9 +181,46 @@ namespace NetTest
             legend.Location = Alignment.UpperCenter;
             legend.Orientation = Orientation.Horizontal;
             plt.Legend();
-            lastResetTime = DateTime.Now;
         }
 
+        private bool IsNetworkConnected()
+        {
+            try
+            {
+                return NetworkInterface.GetIsNetworkAvailable();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        private async void SaveFailedPing(string ipAddress, string errorMessage)
+        {
+            if (IsNetworkConnected())
+            {
+                string folderPath = "logs";
+                string filename = Path.Combine(folderPath, $"FailedPings_{DateTime.Now:yyyyMMdd_HH}.txt");
+                string logEntry = $"[{DateTime.Now}] Ping to {ipAddress} failed: {errorMessage}";
+
+                try
+                {
+                    if (!Directory.Exists(folderPath))
+                    {
+                        Directory.CreateDirectory(folderPath);
+                    }
+
+                    using (StreamWriter writer = File.AppendText(filename))
+                    {
+                        await writer.WriteLineAsync(logEntry);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error saving failed ping: {ex.Message}");
+                }
+            }
+        }
 
         private IPAddress? GetDefaultGateway()
         {
@@ -281,26 +243,99 @@ namespace NetTest
         {
             var plt = pingPlot.Plot;
 
-            if (isGateway)
-            {
-                xGateway[plotIndex % xGateway.Length] = plotIndex / 4.0;
-                yGateway[plotIndex % yGateway.Length] = pingTime;
-            }
-            else
-            {
-                xGoogleDNS[plotIndex % xGoogleDNS.Length] = plotIndex / 4.0;
-                yGoogleDNS[plotIndex % yGoogleDNS.Length] = pingTime;
-            }
+            double[] xData = isGateway ? xGateway : xGoogleDNS;
+            double[] yData = isGateway ? yGateway : yGoogleDNS;
+
+            xData[plotIndex % MaxPlotPoints] = plotIndex / 4.0;
+            yData[plotIndex % MaxPlotPoints] = pingTime;
 
             plotIndex++;
             pingPlot.Render();
         }
 
-        private void SaveFailedPing(string ipAddress, string errorMessage)
+        private void UpdateUIText(TextBlock targetTextBlock, string text)
         {
+            Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                targetTextBlock.Text = text;
+            });
+        }
+
+        private void OnStartTest(object sender, RoutedEventArgs e)
+        {
+            cts?.Cancel();
+            cts = new CancellationTokenSource();
+
+#pragma warning disable CS8602
+#pragma warning disable CS8600
+            var selectedServer = ((ComboBoxItem)serverSelector.SelectedItem).Content.ToString();
+#pragma warning restore CS8600
+#pragma warning restore CS8602
+#pragma warning disable CS8604
+            var ipAddress = serverIPs[selectedServer];
+#pragma warning restore CS8604
+
+            string? gatewayAddress = GetDefaultGateway()?.ToString();
+            if (string.IsNullOrEmpty(gatewayAddress))
+            {
+                UpdateUIText(messageGateway, "Not connected to any network");
+            }
+            else
+            {
+                StartContinuousPing(ipAddress, messageGoogleDNS);
+                StartContinuousPing(gatewayAddress, messageGateway);
+            }
+
+            resetButton.IsEnabled = true;  // Enable the reset button
+        }
+
+        private void OnStopTest(object sender, RoutedEventArgs e)
+        {
+            cts?.Cancel();
+            resetButton.IsEnabled = false;
+        }
+
+        private void OnReset(object sender, RoutedEventArgs e)
+        {
+            cts?.TryReset();
+
+            ResetPlot();
+            sessionStartTime = DateTime.Now;
+            totalPingsLost = 0;
+            totalPingsSuccessful = 0;
+
+#pragma warning disable CS8602
+#pragma warning disable CS8600
+            var selectedServer = ((ComboBoxItem)serverSelector.SelectedItem).Content.ToString();
+#pragma warning restore CS8600
+#pragma warning restore CS8602
+#pragma warning disable CS8604
+            var ipAddress = serverIPs[selectedServer];
+#pragma warning restore CS8604
+            string? gatewayAddress = GetDefaultGateway()?.ToString();
+            cts = new CancellationTokenSource();
+
+            if (string.IsNullOrEmpty(gatewayAddress))
+            {
+                UpdateUIText(messageGateway, "Not connected to any network");
+            }
+            else
+            {
+                StartContinuousPing(ipAddress, messageGoogleDNS);
+                StartContinuousPing(gatewayAddress, messageGateway);
+            }
+        }
+        private async void OnSendRapport(object sender, RoutedEventArgs e)
+        {
+
+            double packetLossPercentage = totalPingsSuccessful > 0 ? Math.Round(((double)totalPingsLost / (totalPingsSuccessful + totalPingsLost)) * 100, 2) : 0;
+            string rapport = $"Session duration: {(DateTime.Now - sessionStartTime).ToString(@"hh\:mm\:ss")}" +
+                $" Pings successful: {totalPingsSuccessful}" +
+                $" Pings lost: {totalPingsLost}" +
+                $" Packet loss: {packetLossPercentage}%";
+
             string folderPath = "logs";
             string filename = Path.Combine(folderPath, $"FailedPings_{DateTime.Now:yyyyMMdd_HH}.txt");
-            string logEntry = $"[{DateTime.Now}] Ping to {ipAddress} failed: {errorMessage}";
 
             try
             {
@@ -311,13 +346,17 @@ namespace NetTest
 
                 using (StreamWriter writer = File.AppendText(filename))
                 {
-                    writer.WriteLine(logEntry);
+                    await writer.WriteLineAsync($"# Rapport generated at {DateTime.Now}");
+                    await writer.WriteLineAsync($"# {rapport}");
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error saving failed ping: {ex.Message}");
+                Console.WriteLine($"Error saving rapport: {ex.Message}");
             }
+
+            cts.Cancel();
+            resetButton.IsEnabled = false;
         }
     }
 }

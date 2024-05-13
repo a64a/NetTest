@@ -1,0 +1,2 @@
+# Rapport generated at 08/05/2024 08:42:19
+# Session duration: 23:12:20 Pings sent: 493524 Pings lost: 181 Packet loss: 0,03667501479158055%
